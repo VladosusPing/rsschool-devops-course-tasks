@@ -14,3 +14,4 @@ terraform {
     dynamodb_table = "components-terraform-lockid"
   }
 }
+
