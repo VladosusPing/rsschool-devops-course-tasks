@@ -1,0 +1,41 @@
+# Local Terraform directories
+.terraform/
+
+# Lock file
+.terraform.lock.hcl
+
+# Ignore override files as they are usually used to override resources locally and should not be part of version control
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore crash log files
+crash.log
+
+# Ignore tfplan files, which are used to store the plan for applying changes
+*.tfplan
+
+# Ignore backup files
+*.backup
+
+# Ignore core dump files
+core.*
+
+# Ignore temporary files created by editors
+*.swp
+*.swo
+*.tmp
+
+# Ignore files related to IDEs and editors
+.vscode/
+.idea/
+*.iml
+
+# Other system files
+.DS_Store
+Thumbs.db
+
+# Creds
+.git-credentials
+
