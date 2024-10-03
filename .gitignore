@@ -36,3 +36,5 @@ core.*
 .DS_Store
 Thumbs.db
 
+# Creds
+.git-credentials
