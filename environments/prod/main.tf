@@ -14,4 +14,7 @@ terraform {
     encrypt        = true
     dynamodb_table = "components-terraform-lockid"
   }
+  
 }
+
+
