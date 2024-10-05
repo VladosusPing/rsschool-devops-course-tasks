@@ -1,6 +1,12 @@
 ### Main vpc
 resource "aws_vpc" "main" {
   cidr_block = var.vpc_cidr
+  tags = {
+    Name            = "prod-vpc" 
+    Env             = "prod"
+    Owner           = "vladislav"
+    Project         = "devops-learning"
+  }
 }
 
 ### Subnets
