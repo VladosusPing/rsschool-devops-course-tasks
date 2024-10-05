@@ -10,7 +10,8 @@
 
    - Terraform code is created and includes:
      - A bucket for Terraform states
-    <img width="1920" alt="image" src="https://github.com/user-attachments/assets/a761c640-8885-4b16-b1b9-cc97f9956eee">
+    <img width="1882" alt="image" src="https://github.com/user-attachments/assets/07894b7c-ca13-4b34-b728-214f92b0e84e">
+
     <img width="1917" alt="image" src="https://github.com/user-attachments/assets/170ee379-790c-4e67-884c-dce7d29e6b5d">
 
 

@@ -6,6 +6,7 @@ environments/prod/.terraform/
 .terraform.lock.hcl
 environments/prod/.terraform.lock.hcl
 
+
 # Ignore override files as they are usually used to override resources locally and should not be part of version control
 override.tf
 override.tf.json
@@ -40,4 +41,3 @@ Thumbs.db
 
 # Creds
 .git-credentials
-
