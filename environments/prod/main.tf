@@ -1,3 +1,4 @@
+# This is main file for terraform on prod env
 terraform {
   required_providers {
     aws = {
@@ -13,5 +14,7 @@ terraform {
     encrypt        = true
     dynamodb_table = "components-terraform-lockid"
   }
+  
 }
+
 
