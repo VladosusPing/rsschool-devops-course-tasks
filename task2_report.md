@@ -89,3 +89,8 @@ Terraform has compared your real infrastructure against your configuration and f
      - Document the infrastructure setup and usage in a README file.
     
 ### __Check README.md file__
+
+   - **Submission (5 points)**
+   - A GitHub Actions (GHA) pipeline is set up for the Terraform code.
+
+### __Check https://github.com/VladosusPing/rsschool-devops-course-tasks/actions/runs/11296107030 . Also you can find success exec on https://github.com/VladosusPing/rsschool-devops-course-tasks/actions__
