@@ -2,10 +2,10 @@
 resource "aws_vpc" "main" {
   cidr_block = var.vpc_cidr
   tags = {
-    Name            = "prod-vpc" 
-    Env             = "prod"
-    Owner           = "vladislav"
-    Project         = "devops-learning"
+    Name    = "prod-vpc"
+    Env     = "prod"
+    Owner   = "vladislav"
+    Project = "devops-learning"
   }
 }
 
@@ -17,10 +17,10 @@ resource "aws_subnet" "prod-public-subnet-us-east-1a" {
 
 
   tags = {
-    Name            = "prod-public-subnet-us-east-1a" 
-    Env             = "prod"
-    Owner           = "vladislav"
-    Project         = "devops-learning"
+    Name    = "prod-public-subnet-us-east-1a"
+    Env     = "prod"
+    Owner   = "vladislav"
+    Project = "devops-learning"
   }
 }
 
@@ -31,10 +31,10 @@ resource "aws_subnet" "prod-public-subnet-us-east-1b" {
 
 
   tags = {
-    Name            = "prod-public-subnet-us-east-1b"
-    Env             = "prod"
-    Owner           = "vladislav"
-    Project         = "devops-learning"
+    Name    = "prod-public-subnet-us-east-1b"
+    Env     = "prod"
+    Owner   = "vladislav"
+    Project = "devops-learning"
   }
 }
 
@@ -45,24 +45,24 @@ resource "aws_subnet" "prod-private-subnet-us-east-1a" {
 
 
   tags = {
-    Name            = "prod-private-subnet-us-east-1a"
-    Env             = "prod"
-    Owner           = "vladislav"
-    Project         = "devops-learning"
+    Name    = "prod-private-subnet-us-east-1a"
+    Env     = "prod"
+    Owner   = "vladislav"
+    Project = "devops-learning"
   }
 }
 
 resource "aws_subnet" "prod-private-subnet-us-east-1b" {
-  vpc_id                     = aws_vpc.main.id
-  cidr_block                 = var.private_us-east-1b_subnet_cidr
-  availability_zone          = "us-east-1b"
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = var.private_us-east-1b_subnet_cidr
+  availability_zone = "us-east-1b"
 
 
   tags = {
-    Name                     = "prod-private-subnet-us-east-1b"
-    Env                      = "prod"
-    Owner                    = "vladislav"
-    Project                  = "devops-learning"
+    Name    = "prod-private-subnet-us-east-1b"
+    Env     = "prod"
+    Owner   = "vladislav"
+    Project = "devops-learning"
   }
 }
 
@@ -70,9 +70,9 @@ resource "aws_subnet" "prod-private-subnet-us-east-1b" {
 
 resource "aws_internet_gateway" "prod-igw" {
   tags = {
-    Name                    = "prod-igw"
+    Name = "prod-igw"
   }
-  vpc_id                    = aws_vpc.main.id
+  vpc_id = aws_vpc.main.id
 }
 
 # Elastic IP for IGW
@@ -84,21 +84,21 @@ resource "aws_eip" "prod-nat-gw-eip" {
 }
 
 resource "aws_nat_gateway" "prod-nat-gw" {
-  allocation_id             = aws_eip.prod-nat-gw-eip.id
-  subnet_id                 = aws_subnet.prod-public-subnet-us-east-1a.id
+  allocation_id = aws_eip.prod-nat-gw-eip.id
+  subnet_id     = aws_subnet.prod-public-subnet-us-east-1a.id
 
   tags = {
-    Name                    = "prod-nat-gw"
+    Name = "prod-nat-gw"
   }
-  depends_on                = [aws_eip.prod-nat-gw-eip]
+  depends_on = [aws_eip.prod-nat-gw-eip]
 }
 
 ### Route tables for the subnets
 
 resource "aws_route_table" "public-route-table" {
-  vpc_id                    = aws_vpc.main.id
+  vpc_id = aws_vpc.main.id
   tags = {
-    Name                    = "public-route-table"
+    Name = "public-route-table"
   }
 }
 

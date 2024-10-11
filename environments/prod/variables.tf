@@ -42,9 +42,9 @@ variable "health_check_path" {
 
 variable "amis" {
   description = "Which AMI to spawn."
-  
+
   # Debian 12 AMI
-  default = "ami-064519b8c76274859" 
+  default = "ami-064519b8c76274859"
 }
 variable "instance_type" {
   default = "t2.micro"
