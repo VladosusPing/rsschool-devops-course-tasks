@@ -13,6 +13,10 @@ permissions:
 jobs:
   terraform-check:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./environments/prod/
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
