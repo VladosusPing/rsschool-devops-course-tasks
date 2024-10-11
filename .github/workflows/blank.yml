@@ -10,7 +10,7 @@ on:
 permissions:
       id-token: write # This is required for aws oidc connection
       contents: read # This is required for actions/checkout
-      pull-requests: write # This is required for gh bot to comment in PR
+      pull-requests: write # This is required for gh bot to comment PR
 
 jobs:
   terraform-check:
@@ -21,10 +21,10 @@ jobs:
         working-directory: environments/prod
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v2
+      uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: 1.9.6
 
@@ -40,15 +40,15 @@ jobs:
     needs: terraform-check
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v2
+      uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: 1.9.6
 
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v2
+      uses: aws-actions/configure-aws-credentials@v4
       with:
         role-to-assume: arn:aws:iam::692859951121:role/github-actions-role
         aws-region: us-east-1
@@ -70,15 +70,15 @@ jobs:
     needs: terraform-plan
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v2
+      uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: 1.9.6
 
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v2
+      uses: aws-actions/configure-aws-credentials@v4
       with:
         role-to-assume: arn:aws:iam::692859951121:role/github-actions-role
         aws-region: us-east-1
