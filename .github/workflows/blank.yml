@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      #- task_1
 
 
 permissions:
@@ -39,7 +38,7 @@ jobs:
         terraform_version: 1.9.6
 
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials
+      uses: aws-actions/configure-aws-credentials@v2
       with:
         role-to-assume: arn:aws:iam::692859951121:role/github-actions-role
         aws-region: us-east-1
