@@ -2,10 +2,10 @@ name: "Terraform GitHub action"
 on:
   push:
     branches:
-      - master
+      - main
       #- task_1
   pull_request:
-    - master
+    - main
 permissions:
       id-token: write # This is required for aws oidc connection
       contents: read # This is required for actions/checkout
