@@ -1,17 +1,15 @@
-name: Terraform Deployment
-
+name: "Terraform GitHub action"
 on:
-  pull_request:
-    branches:
-      - main
   push:
     branches:
-      - main
-
+      - master
+      #- task_1
+  pull_request:
+    - master
 permissions:
-  id-token: write # This is required for requesting the JWT
-  contents: read  # This is required for actions/checkout
-  pull-requests: write 
+      id-token: write # This is required for aws oidc connection
+      contents: read # This is required for actions/checkout
+      pull-requests: write # This is required for gh bot to comment PR
 
 jobs:
   terraform-check:
