@@ -1,8 +1,14 @@
-resource "aws_instance" "first_instance" {
+resource "aws_instance" "prod-ec2-bastion" {
   ami           = var.amis
   instance_type = var.instance_type
   subnet_id     = aws_subnet.prod-public-subnet-us-east-1a.id
-  security_groups = [ aws_security_group.prod-bastion-sg.name ]
+  vpc_security_group_ids = [ aws_security_group.prod-bastion-sg.id ]
+  key_name = aws_key_pair.terraform-lab.key_name
+  
+  root_block_device {
+    volume_size = 10
+    volume_type = var.volume_type
+  }
 
   tags = {
     Name = "prod-bastion00"
@@ -12,3 +18,24 @@ resource "aws_instance" "first_instance" {
   }
 }
 
+resource "aws_instance" "prod-ec2-k3s-cluster-allinone" {
+  ami           = var.amis
+  instance_type = var.instance_type
+  subnet_id     = aws_subnet.prod-public-subnet-us-east-1b.id
+  vpc_security_group_ids = [ aws_security_group.prod-ec2-sg ]
+  key_name = aws_key_pair.terraform-lab.key_name
+  
+  user_data = file(var.k3s_installation_script)
+
+  root_block_device {
+    volume_size = 20
+    volume_type = var.volume_type
+  }
+
+  tags = {
+    Name = "prod-ec2-k3s-cluster-allinone"
+    Project = var.tag_project
+    Owner = var.tag_owner
+    Env = var.tag_env
+  }
+}

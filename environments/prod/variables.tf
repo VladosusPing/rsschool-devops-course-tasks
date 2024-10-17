@@ -87,6 +87,16 @@ variable "ssh_pubkey_file" {
 }
 
 
+variable "volume_type" {
+  description = "Volume type on project"
+  default     = "gp2"
+}
+
+variable "k3s_installation_script" {
+  description = "Path to an SSH public key"
+  default     = "./scripts/k3s_install.sh"
+}
+
 # auto scaling
 
 variable "autoscale_min" {
