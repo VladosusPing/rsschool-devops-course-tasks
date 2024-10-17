@@ -77,21 +77,21 @@ resource "aws_internet_gateway" "prod-igw" {
 
 # Elastic IP for IGW
 
-resource "aws_eip" "prod-nat-gw-eip" {
-  vpc                       = true
-  associate_with_private_ip = "10.0.1.1"
-  depends_on                = [aws_internet_gateway.prod-igw]
-}
+#resource "aws_eip" "prod-nat-gw-eip" {
+#  vpc                       = true
+#  associate_with_private_ip = "10.0.1.1"
+#  depends_on                = [aws_internet_gateway.prod-igw]
+#}
 
-resource "aws_nat_gateway" "prod-nat-gw" {
-  allocation_id = aws_eip.prod-nat-gw-eip.id
-  subnet_id     = aws_subnet.prod-public-subnet-us-east-1a.id
+#resource "aws_nat_gateway" "prod-nat-gw" {
+#  allocation_id = aws_eip.prod-nat-gw-eip.id
+#  subnet_id     = aws_subnet.prod-public-subnet-us-east-1a.id
 
-  tags = {
-    Name = "prod-nat-gw"
-  }
-  depends_on = [aws_eip.prod-nat-gw-eip]
-}
+#  tags = {
+#    Name = "prod-nat-gw"
+#  }
+#  depends_on = [aws_eip.prod-nat-gw-eip]
+#}
 
 ### Route tables for the subnets
 
@@ -120,11 +120,11 @@ resource "aws_route" "public-internet-igw-route" {
 
 ### Route NAT Gateway
 
-resource "aws_route" "nat-ngw-route" {
-  route_table_id         = aws_route_table.private-route-table.id
-  nat_gateway_id         = aws_nat_gateway.prod-nat-gw.id
-  destination_cidr_block = "0.0.0.0/0"
-}
+#resource "aws_route" "nat-ngw-route" {
+#  route_table_id         = aws_route_table.private-route-table.id
+#  nat_gateway_id         = aws_nat_gateway.prod-nat-gw.id
+#  destination_cidr_block = "0.0.0.0/0"
+#}
 
 ### Associate the newly created route tables to the subnets
 
