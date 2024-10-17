@@ -19,6 +19,12 @@ resource "aws_security_group" "prod-load-balancer-sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  tags = {
+    Name = "prod-load-balancer-sg"
+    Project = var.tag_project
+    Owner = var.tag_owner
+    Env = var.tag_env
+  }
 }
 
 ### Instance Security group (traffic ALB -> EC2, ssh -> EC2)
@@ -47,6 +53,12 @@ resource "aws_security_group" "prod-ec2-sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  tags = {
+    Name = "prod-ec2-sg"
+    Project = var.tag_project
+    Owner = var.tag_owner
+    Env = var.tag_env
+  }
 }
 
 
@@ -68,5 +80,11 @@ resource "aws_security_group" "prod-bastion-sg" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "prod-bastion-sg"
+    Project = var.tag_project
+    Owner = var.tag_owner
+    Env = var.tag_env
   }
 }

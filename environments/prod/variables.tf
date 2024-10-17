@@ -1,5 +1,28 @@
 # This file contains all the variables that are used in the Terraform configuration.
 
+##################################### Tags vars #####################################
+
+variable "tag_env" {
+  description = "Enviroment tag"
+  type        = string
+  default     = "prod"
+}
+
+variable "tag_owner" {
+  description = "Owner name tag"
+  type        = string
+  default     = "vladislav"
+}
+
+variable "tag_project" {
+  description = "Project name tag"
+  type        = string
+  default     = "devops-learning"
+}
+
+
+################################## Tags vars end ###################################
+
 ##################################### VPC vars #####################################
 
 variable "vpc_cidr" {

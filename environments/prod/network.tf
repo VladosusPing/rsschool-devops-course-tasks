@@ -3,9 +3,9 @@ resource "aws_vpc" "main" {
   cidr_block = var.vpc_cidr
   tags = {
     Name    = "prod-vpc"
-    Env     = "prod"
-    Owner   = "vladislav"
-    Project = "devops-learning"
+    Project = var.tag_project
+    Owner = var.tag_owner
+    Env = var.tag_env
   }
 }
 
@@ -18,9 +18,9 @@ resource "aws_subnet" "prod-public-subnet-us-east-1a" {
 
   tags = {
     Name    = "prod-public-subnet-us-east-1a"
-    Env     = "prod"
-    Owner   = "vladislav"
-    Project = "devops-learning"
+    Project = var.tag_project
+    Owner = var.tag_owner
+    Env = var.tag_env
   }
 }
 
@@ -32,9 +32,9 @@ resource "aws_subnet" "prod-public-subnet-us-east-1b" {
 
   tags = {
     Name    = "prod-public-subnet-us-east-1b"
-    Env     = "prod"
-    Owner   = "vladislav"
-    Project = "devops-learning"
+    Project = var.tag_project
+    Owner = var.tag_owner
+    Env = var.tag_env
   }
 }
 
@@ -46,9 +46,9 @@ resource "aws_subnet" "prod-private-subnet-us-east-1a" {
 
   tags = {
     Name    = "prod-private-subnet-us-east-1a"
-    Env     = "prod"
-    Owner   = "vladislav"
-    Project = "devops-learning"
+    Project = var.tag_project
+    Owner = var.tag_owner
+    Env = var.tag_env
   }
 }
 
@@ -60,9 +60,9 @@ resource "aws_subnet" "prod-private-subnet-us-east-1b" {
 
   tags = {
     Name    = "prod-private-subnet-us-east-1b"
-    Env     = "prod"
-    Owner   = "vladislav"
-    Project = "devops-learning"
+    Project = var.tag_project
+    Owner = var.tag_owner
+    Env = var.tag_env
   }
 }
 
@@ -89,6 +89,9 @@ resource "aws_internet_gateway" "prod-igw" {
 
 #  tags = {
 #    Name = "prod-nat-gw"
+#    Project = var.tag_project
+#    Owner = var.tag_owner
+#    Env = var.tag_env
 #  }
 #  depends_on = [aws_eip.prod-nat-gw-eip]
 #}
@@ -99,6 +102,9 @@ resource "aws_route_table" "public-route-table" {
   vpc_id = aws_vpc.main.id
   tags = {
     Name = "public-route-table"
+    Project = var.tag_project
+    Owner = var.tag_owner
+    Env = var.tag_env
   }
 }
 
@@ -106,6 +112,9 @@ resource "aws_route_table" "private-route-table" {
   vpc_id = aws_vpc.main.id
   tags = {
     Name = "private-route-table"
+    Project = var.tag_project
+    Owner = var.tag_owner
+    Env = var.tag_env
   }
 }
 
