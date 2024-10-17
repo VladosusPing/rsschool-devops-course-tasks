@@ -71,11 +71,36 @@ resource "aws_subnet" "prod-private-subnet-us-east-1b" {
 resource "aws_internet_gateway" "prod-igw" {
   tags = {
     Name = "prod-igw"
+    Project = var.tag_project
+    Owner = var.tag_owner
+    Env = var.tag_env
   }
   vpc_id = aws_vpc.main.id
 }
 
-# Elastic IP for IGW
+# Elastic IPs
+
+resource "aws_eip" "bastion_eip" {
+  vpc = true 
+
+  tags = {
+    Name = "bastion_eip"
+    Project = var.tag_project
+    Owner = var.tag_owner
+    Env = var.tag_env
+  }
+}
+
+resource "aws_eip" "k3s_cluster_eip" {
+  vpc = true
+
+  tags = {
+    Name = "k3s_cluster_eip"
+    Project = var.tag_project
+    Owner = var.tag_owner
+    Env = var.tag_env
+  }
+}
 
 #resource "aws_eip" "prod-nat-gw-eip" {
 #  vpc                       = true
@@ -156,4 +181,3 @@ resource "aws_route_table_association" "prod-private-subnet-us-east-1b-associati
   route_table_id = aws_route_table.private-route-table.id
   subnet_id      = aws_subnet.prod-private-subnet-us-east-1b.id
 }
-
