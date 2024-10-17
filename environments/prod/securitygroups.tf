@@ -20,10 +20,10 @@ resource "aws_security_group" "prod-load-balancer-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "prod-load-balancer-sg"
+    Name    = "prod-load-balancer-sg"
     Project = var.tag_project
-    Owner = var.tag_owner
-    Env = var.tag_env
+    Owner   = var.tag_owner
+    Env     = var.tag_env
   }
 }
 
@@ -44,7 +44,7 @@ resource "aws_security_group" "prod-ec2-sg" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Allow HTTP from anywhere
+    cidr_blocks = ["0.0.0.0/0"] # Allow HTTP from anywhere
   }
 
   egress {
@@ -54,10 +54,10 @@ resource "aws_security_group" "prod-ec2-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "prod-ec2-sg"
+    Name    = "prod-ec2-sg"
     Project = var.tag_project
-    Owner = var.tag_owner
-    Env = var.tag_env
+    Owner   = var.tag_owner
+    Env     = var.tag_env
   }
 }
 
@@ -82,9 +82,9 @@ resource "aws_security_group" "prod-bastion-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "prod-bastion-sg"
+    Name    = "prod-bastion-sg"
     Project = var.tag_project
-    Owner = var.tag_owner
-    Env = var.tag_env
+    Owner   = var.tag_owner
+    Env     = var.tag_env
   }
 }

@@ -4,8 +4,8 @@ resource "aws_vpc" "main" {
   tags = {
     Name    = "prod-vpc"
     Project = var.tag_project
-    Owner = var.tag_owner
-    Env = var.tag_env
+    Owner   = var.tag_owner
+    Env     = var.tag_env
   }
 }
 
@@ -19,8 +19,8 @@ resource "aws_subnet" "prod-public-subnet-us-east-1a" {
   tags = {
     Name    = "prod-public-subnet-us-east-1a"
     Project = var.tag_project
-    Owner = var.tag_owner
-    Env = var.tag_env
+    Owner   = var.tag_owner
+    Env     = var.tag_env
   }
 }
 
@@ -33,8 +33,8 @@ resource "aws_subnet" "prod-public-subnet-us-east-1b" {
   tags = {
     Name    = "prod-public-subnet-us-east-1b"
     Project = var.tag_project
-    Owner = var.tag_owner
-    Env = var.tag_env
+    Owner   = var.tag_owner
+    Env     = var.tag_env
   }
 }
 
@@ -47,8 +47,8 @@ resource "aws_subnet" "prod-private-subnet-us-east-1a" {
   tags = {
     Name    = "prod-private-subnet-us-east-1a"
     Project = var.tag_project
-    Owner = var.tag_owner
-    Env = var.tag_env
+    Owner   = var.tag_owner
+    Env     = var.tag_env
   }
 }
 
@@ -61,8 +61,8 @@ resource "aws_subnet" "prod-private-subnet-us-east-1b" {
   tags = {
     Name    = "prod-private-subnet-us-east-1b"
     Project = var.tag_project
-    Owner = var.tag_owner
-    Env = var.tag_env
+    Owner   = var.tag_owner
+    Env     = var.tag_env
   }
 }
 
@@ -70,10 +70,10 @@ resource "aws_subnet" "prod-private-subnet-us-east-1b" {
 
 resource "aws_internet_gateway" "prod-igw" {
   tags = {
-    Name = "prod-igw"
+    Name    = "prod-igw"
     Project = var.tag_project
-    Owner = var.tag_owner
-    Env = var.tag_env
+    Owner   = var.tag_owner
+    Env     = var.tag_env
   }
   vpc_id = aws_vpc.main.id
 }
@@ -81,13 +81,13 @@ resource "aws_internet_gateway" "prod-igw" {
 # Elastic IPs
 
 resource "aws_eip" "bastion_eip" {
-  vpc = true 
+  vpc = true
 
   tags = {
-    Name = "bastion_eip"
+    Name    = "bastion_eip"
     Project = var.tag_project
-    Owner = var.tag_owner
-    Env = var.tag_env
+    Owner   = var.tag_owner
+    Env     = var.tag_env
   }
 }
 
@@ -95,10 +95,10 @@ resource "aws_eip" "k3s_cluster_eip" {
   vpc = true
 
   tags = {
-    Name = "k3s_cluster_eip"
+    Name    = "k3s_cluster_eip"
     Project = var.tag_project
-    Owner = var.tag_owner
-    Env = var.tag_env
+    Owner   = var.tag_owner
+    Env     = var.tag_env
   }
 }
 
@@ -126,20 +126,20 @@ resource "aws_eip" "k3s_cluster_eip" {
 resource "aws_route_table" "public-route-table" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "public-route-table"
+    Name    = "public-route-table"
     Project = var.tag_project
-    Owner = var.tag_owner
-    Env = var.tag_env
+    Owner   = var.tag_owner
+    Env     = var.tag_env
   }
 }
 
 resource "aws_route_table" "private-route-table" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "private-route-table"
+    Name    = "private-route-table"
     Project = var.tag_project
-    Owner = var.tag_owner
-    Env = var.tag_env
+    Owner   = var.tag_owner
+    Env     = var.tag_env
   }
 }
 
