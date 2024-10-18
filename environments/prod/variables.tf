@@ -1,5 +1,28 @@
 # This file contains all the variables that are used in the Terraform configuration.
 
+##################################### Tags vars #####################################
+
+variable "tag_env" {
+  description = "Enviroment tag"
+  type        = string
+  default     = "prod"
+}
+
+variable "tag_owner" {
+  description = "Owner name tag"
+  type        = string
+  default     = "vladislav"
+}
+
+variable "tag_project" {
+  description = "Project name tag"
+  type        = string
+  default     = "devops-learning"
+}
+
+
+################################## Tags vars end ###################################
+
 ##################################### VPC vars #####################################
 
 variable "vpc_cidr" {
@@ -60,9 +83,19 @@ variable "ec2_instance_name" {
 # key pair - Location to the SSH Key generate using openssl or ssh-keygen or AWS KeyPair
 variable "ssh_pubkey_file" {
   description = "Path to an SSH public key"
-  default     = "~/.ssh/aws/aws_key.pub"
+  default     = "public_keys/aws_key.pub"
 }
 
+
+variable "volume_type" {
+  description = "Volume type on project"
+  default     = "gp2"
+}
+
+variable "k3s_installation_script" {
+  description = "Path to an SSH public key"
+  default     = "./scripts/k3s_install.sh"
+}
 
 # auto scaling
 
