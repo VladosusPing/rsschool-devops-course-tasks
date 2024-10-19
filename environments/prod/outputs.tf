@@ -57,3 +57,15 @@ output "prod_eip_k3s_cluster_id" {
   description = "ID of the Elastic IP associated with the K3s Cluster All-in-One EC2 instance"
   value       = aws_eip.k3s_cluster_eip.id
 }
+
+# IP of the associated Elastic IP for Bastion
+output "prod_eip_bastion_ip" {
+  description = "IP of the Elastic IP associated with the Bastion EC2 instance"
+  value       = aws_eip.bastion_eip.public_ip
+}
+
+# IP of the associated Elastic IP for K3s Cluster All-in-One
+output "prod_eip_k3s_cluster_ip" {
+  description = "IP of the Elastic IP associated with the K3s Cluster All-in-One EC2 instance"
+  value       = aws_eip.k3s_cluster_eip.public_ip
+}
