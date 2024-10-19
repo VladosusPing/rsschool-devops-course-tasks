@@ -13,7 +13,6 @@ swapoff -a
   https://get.k3s.io | INSTALL_K3S_CHANNEL=latest sh -
 
 # Install helm using the official helm install script
-
 curl -fsSL -o /var/tmp/get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 /var/tmp/get_helm.sh
 . /var/tmp/get_helm.sh
