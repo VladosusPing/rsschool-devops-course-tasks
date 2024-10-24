@@ -27,7 +27,9 @@ terraform {
 
 module "aws_infrastructure" {
   source = "../modules/aws_infrastructure"
+
   k3s_installation_script = var.k3s_installation_script
-  ssh_pubkey_file = var.ssh_pubkey_file
+  ssh_pubkey_file         = var.ssh_pubkey_file
+  tag_env                 = var.tag_env
 }
 

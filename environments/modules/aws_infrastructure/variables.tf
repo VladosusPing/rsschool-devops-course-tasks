@@ -5,7 +5,6 @@
 variable "tag_env" {
   description = "Enviroment tag"
   type        = string
-  default     = "prod"
 }
 
 variable "tag_owner" {
