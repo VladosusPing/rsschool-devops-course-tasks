@@ -69,7 +69,7 @@ jobs:
       run: terraform init
 
     - name: Terraform Plan
-      run: terraform plan
+      run: terraform plan -var-file="prod.tfvars"
 
   terraform-apply:
     if: github.ref == 'refs/heads/main'
@@ -99,5 +99,16 @@ jobs:
       run: terraform init
 
     - name: Terraform Apply
-      run: terraform apply -auto-approve
+      run: terraform apply -auto-approve -var-file="prod.tfvars"
+    
+    - name: Extract Outputs
+      id: outputs
+      run: |
+          echo "##[set-output name=prod_eip_bastion_ip;]=$(terraform output -raw prod_ec2_bastion_public_ip)"
+          echo "##[set-output name=prod_eip_k3s_cluster_ip;]=$(terraform output -raw prod_ec2_k3s_cluster_allinone_public_ip)"
+      shell: bash
 
+
+#  jenkins-installation:
+#    runs-on: ubuntu-latest
+#    needs: terraform-apply

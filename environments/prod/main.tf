@@ -5,6 +5,14 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 4.18.0"
     }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "~> 2.0.0"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "~> 2.0.0"
+    }
   }
 
   backend "s3" {
@@ -17,4 +25,9 @@ terraform {
 
 }
 
+module "aws_infrastructure" {
+  source = "../modules/aws_infrastructure"
+  k3s_installation_script = var.k3s_installation_script
+  ssh_pubkey_file = var.ssh_pubkey_file
+}
 

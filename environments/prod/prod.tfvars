@@ -1,6 +1,5 @@
 # This file contains the values ​​the variables that are defined in the variables.tf file
-vpc_cidr                       = "10.0.0.0/16"
-private_us-east-1a_subnet_cidr = "10.0.1.0/24"
-private_us-east-1b_subnet_cidr = "10.0.2.0/24"
-public_us-east-1a_subnet_cidr  = "10.1.1.0/24"
-public_us-east-1b_subnet_cidr  = "10.2.1.0/24"
+ssh_pubkey_file         = "./public_keys/aws_key.pub"
+k3s_installation_script = "../scripts/k3s_install.sh"
+tag_env                 = "prod"
+amis                    = "ami-064519b8c76274859"
