@@ -69,3 +69,8 @@ output "prod_eip_k3s_cluster_ip" {
   description = "IP of the Elastic IP associated with the K3s Cluster All-in-One EC2 instance"
   value       = aws_eip.k3s_cluster_eip.public_ip
 }
+
+output "prod_eip_k3s_cluster_private_ip" {
+  description = "Private IP associated with the K3s Cluster All-in-One EC2 instance"
+  value       = aws_eip.k3s_cluster_eip.private_ip
+}

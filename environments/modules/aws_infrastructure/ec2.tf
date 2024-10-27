@@ -7,7 +7,7 @@ resource "aws_instance" "prod-ec2-bastion" {
   key_name               = aws_key_pair.terraform-lab.key_name
 
   root_block_device {
-    volume_type = "gp2" # Specifies that this is a gp3 volume
+    volume_type = "gp3" # Specifies that this is a gp3 volume
     volume_size = 8     # Volume size in GB
     iops        = 3000  # gp3 allows custom IOPS, with a minimum of 3,000
     throughput  = 125   # You can specify throughput in MiB/s, minimum is 125 for gp3
