@@ -6,6 +6,11 @@
 apt-get update
 apt-get install -y curl
 
+# Install and start the SSM agent
+snap install amazon-ssm-agent --classic
+systemctl enable amazon-ssm-agent
+systemctl start amazon-ssm-agent
+
 # Disable swap (Kubernetes requires swap to be disabled)
 swapoff -a
 

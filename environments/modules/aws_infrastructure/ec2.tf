@@ -7,9 +7,35 @@ resource "aws_instance" "prod-ec2-bastion" {
   key_name               = aws_key_pair.terraform-lab.key_name
 
   root_block_device {
-    volume_size = 10
-    volume_type = var.volume_type
+    volume_type = "gp2" # Specifies that this is a gp3 volume
+    volume_size = 8     # Volume size in GB
+    iops        = 3000  # gp3 allows custom IOPS, with a minimum of 3,000
+    throughput  = 125   # You can specify throughput in MiB/s, minimum is 125 for gp3
   }
+  
+  user_data = <<-EOF
+    #!/bin/bash
+    hostname bastion_host
+    apt-get update
+    apt-get install -y iptables
+    
+    # Install and start the SSM agent
+    snap install amazon-ssm-agent --classic
+    systemctl enable amazon-ssm-agent
+    systemctl start amazon-ssm-agent
+    
+    # Install NGINX and start
+    apt-get -y install nginx
+    systemctl enable nginx
+    systemctl start nginx
+    
+    # Enable IP forwarding for routing
+    echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+    sysctl -p /etc/sysctl.conf
+    
+    # Set up NAT to allow private instances to access the internet through Bastion
+    iptables -t nat -A POSTROUTING -o ens5 -s 0.0.0.0/0 -j MASQUERADE
+  EOF
 
   tags = {
     Name    = "prod-bastion00"
@@ -29,8 +55,10 @@ resource "aws_instance" "prod-ec2-k3s-cluster-allinone" {
   user_data = file(var.k3s_installation_script)
 
   root_block_device {
-    volume_size = 20
-    volume_type = var.volume_type
+    volume_type = "gp3" # Specifies that this is a gp3 volume
+    volume_size = 16    # Volume size in GB
+    iops        = 3000  # gp3 allows custom IOPS, with a minimum of 3,000
+    throughput  = 125   # You can specify throughput in MiB/s, minimum is 125 for gp3
   }
 
   tags = {
@@ -39,6 +67,7 @@ resource "aws_instance" "prod-ec2-k3s-cluster-allinone" {
     Owner   = var.tag_owner
     Env     = var.tag_env
   }
+  depends_on = [aws_instance.prod-ec2-bastion]
 }
 
 ### Associate ec2 with eips 
