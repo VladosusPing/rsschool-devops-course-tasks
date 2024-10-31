@@ -23,6 +23,27 @@ resource "aws_iam_role" "github_actions_role" {
   })
 }
 
+resource "aws_iam_policy" "aws_ssm_parameter_full_access" {
+  name = "aws_ssm_parameter_full_access"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : "ssm:*",
+        "Resource" : "*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "attach_aws_ssm_parameter_full_access" {
+  depends_on = [aws_iam_policy.aws_ssm_parameter_full_access]
+  role       = aws_iam_role.github_actions_role.name
+  policy_arn = aws_iam_policy.aws_ssm_parameter_full_access.arn
+}
+
 resource "aws_iam_role_policy_attachment" "attach_ec2_full_access" {
   role       = aws_iam_role.github_actions_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"

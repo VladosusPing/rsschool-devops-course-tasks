@@ -28,8 +28,32 @@ terraform {
 module "aws_infrastructure" {
   source = "../modules/aws_infrastructure"
 
-  k3s_installation_script = var.k3s_installation_script
-  ssh_pubkey_file         = var.ssh_pubkey_file
-  tag_env                 = var.tag_env
+  k3s_installation_script    = var.k3s_installation_script
+  ssh_pubkey_file            = var.ssh_pubkey_file
+  tag_env                    = var.tag_env
+  k3s_client_certificate     = var.k3s_client_certificate
+  k3s_client_key             = var.k3s_client_key
+  k3s_cluster_ca_certificate = var.k3s_cluster_ca_certificate
+  ssh_privkey_file           = var.ssh_privkey_file
+}
+
+module "kubernetes" {
+  source = "../modules/k3s"
+
+  client_certificate     = var.k3s_client_certificate
+  client_key             = var.k3s_client_key
+  cluster_ca_certificate = var.k3s_cluster_ca_certificate
+
+  depends_on = [module.aws_infrastructure]
+}
+
+module "helm" {
+  source = "../modules/helm"
+
+  client_certificate     = var.k3s_client_certificate
+  client_key             = var.k3s_client_key
+  cluster_ca_certificate = var.k3s_cluster_ca_certificate
+
+  depends_on = [module.aws_infrastructure]
 }
 

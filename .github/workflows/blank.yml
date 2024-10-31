@@ -22,6 +22,9 @@ env:
   TERRAFORM_VERSION: ${{ vars.TF_VERSION }}
   TERRAFORM_DIR: ${{ vars.TERRAFORM_DIR }}
   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+  K3S_CLUSTER_CA_CERTIFICATE: ${{ secrets.K3S_CLUSTER_CA_CERTIFICATE }}
+  K3S_CLIENT_KEY: ${{ secrets.K3S_CLIENT_KEY }}
+  K3S_CLIENT_CERTIFICATE: ${{ secrets.K3S_CLIENT_CERTIFICATE }}
 
 jobs:
   terraform-check:
@@ -69,7 +72,7 @@ jobs:
       run: terraform init
 
     - name: Terraform Plan
-      run: terraform plan -var-file="prod.tfvars"
+      run: terraform plan -var-file="prod.tfvars" -var "k3s_cluster_ca_certificate=${{ env.K3S_CLUSTER_CA_CERTIFICATE }}" -var "k3s_client_key=${{ env.K3S_CLIENT_KEY }}" -var "k3s_client_certificate=${{ env.K3S_CLIENT_CERTIFICATE }}" -var "ssh_privkey_file=${{ env.SSH_PRIVATE_KEY }}"
 
   terraform-apply:
     if: github.ref == 'refs/heads/main'
@@ -78,7 +81,7 @@ jobs:
       run:
         shell: bash
         working-directory: ${{ env.TERRAFORM_DIR }}
-    needs: terraform-plan
+    needs: terraform-plan 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -99,7 +102,7 @@ jobs:
       run: terraform init
 
     - name: Terraform Apply
-      run: terraform apply -auto-approve -var-file="prod.tfvars"
+      run: terraform apply -auto-approve -var-file="prod.tfvars" -var "k3s_cluster_ca_certificate=${{ env.K3S_CLUSTER_CA_CERTIFICATE }}" -var "k3s_client_key=${{ env.K3S_CLIENT_KEY }}" -var "k3s_client_certificate=${{ env.K3S_CLIENT_CERTIFICATE }}" -var "ssh_privkey_file=${{ env.SSH_PRIVATE_KEY }}"
     
     - name: Extract Outputs
       id: outputs

@@ -86,6 +86,11 @@ variable "ssh_pubkey_file" {
   type        = string
 }
 
+variable "ssh_privkey_file" {
+  description = "SSH private key"
+  type        = string
+  sensitive   = true
+}
 
 variable "volume_type" {
   description = "Volume type on project"
@@ -105,4 +110,21 @@ variable "k3s_installation_script" {
 variable "aws_region" {
   type    = string
   default = "us-east-1"
+}
+
+##################################### K3S vars ######################################
+
+variable "k3s_client_certificate" {
+  type      = string
+  sensitive = true
+}
+
+variable "k3s_client_key" {
+  type      = string
+  sensitive = true
+}
+
+variable "k3s_cluster_ca_certificate" {
+  type      = string
+  sensitive = true
 }

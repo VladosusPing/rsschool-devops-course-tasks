@@ -27,7 +27,6 @@ resource "aws_security_group" "prod-load-balancer-sg" {
   }
 }
 
-### Instance Security group (traffic ALB -> EC2, ssh -> EC2)
 resource "aws_security_group" "prod-ec2-sg" {
   name        = "prod-ec2-sg"
   description = "Allows inbound access from the ALB only"
@@ -45,6 +44,20 @@ resource "aws_security_group" "prod-ec2-sg" {
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] # Allow HTTP from anywhere
+  }
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # Allow HTTPS from anywhere
+  }
+
+  ingress {
+    from_port   = 6443
+    to_port     = 6443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # Allow kubernetes from anywhere
   }
 
   egress {

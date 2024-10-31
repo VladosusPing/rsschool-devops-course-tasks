@@ -1,11 +1,14 @@
 variable "client_certificate" {
-  type = string
+  type      = string
+  sensitive = true
 }
 
 variable "client_key" {
-  type = string
+  type      = string
+  sensitive = true
 }
 
 variable "cluster_ca_certificate" {
-  type = string
+  type      = string
+  sensitive = true
 }

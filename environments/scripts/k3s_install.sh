@@ -15,7 +15,7 @@ systemctl start amazon-ssm-agent
 swapoff -a
 
 # Install K3s using the official K3s install script
-curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=latest sh -
+curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=latest sh - 
 
 # Install helm using the official helm install script
 curl -fsSL -o /var/tmp/get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
