@@ -73,4 +73,5 @@ output "prod_eip_k3s_cluster_ip" {
 output "prod_eip_k3s_cluster_private_ip" {
   description = "Private IP associated with the K3s Cluster All-in-One EC2 instance"
   value       = aws_eip.k3s_cluster_eip.private_ip
+  depends_on  = [aws_instance.prod-ec2-k3s-cluster-allinone]
 }

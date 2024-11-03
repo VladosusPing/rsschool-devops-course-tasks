@@ -128,3 +128,10 @@ variable "k3s_cluster_ca_certificate" {
   type      = string
   sensitive = true
 }
+
+variable "k3s_token" {
+  default     = null
+  description = "Token for K3s cluster authentication"
+  type        = string
+  sensitive   = true
+}
